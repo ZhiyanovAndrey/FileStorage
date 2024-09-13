@@ -2,8 +2,8 @@
 {
     public class Folders
     {
-        public int Id { get; set; }
+        public int FolderId { get; set; }
         public string Name { get; set; }    
-        public string IdParentName { get; set; }
+        public string FolderParentNameId { get; set; }
     }
 }
