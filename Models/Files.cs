@@ -9,7 +9,7 @@
         public int FolderId { get; set; }
         public string Content { get; set; }
 
-        public Folders Folders  { get; set; } // одной папке принадлежит много файлов
+        public ICollection IcCollection <Folders> Folders  { get; set; } // одной папке принадлежит много файлов
 
         virtual public FileExtention? fileExtention { get; set; } // многие ко многим
 
