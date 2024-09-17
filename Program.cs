@@ -6,15 +6,25 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// регистрация БД
-builder.Services.AddDbContext<Context>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection"));
 
 
-}
+// получаем строку подключения из файла конфигурации
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-);
+// добавляем контекст ApplicationContext в качестве сервиса в приложение
+builder.Services.AddDbContext<Context>(options => options.UseNpgsql(connection));
+
+
+//// или так регистрация БД
+//builder.Services.AddDbContext<Context>(options =>
+//{
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection"));
+
+
+//}
+
+//);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
