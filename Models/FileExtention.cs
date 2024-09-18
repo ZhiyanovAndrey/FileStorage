@@ -10,6 +10,6 @@ namespace FileStorage.Models
         public byte? Foto { get; set; }
 
 
-        public ICollection <Files> files{ get; set; } // многие ко многим
+        public ICollection <File> files{ get; set; } // многие ко многим
     }
 }

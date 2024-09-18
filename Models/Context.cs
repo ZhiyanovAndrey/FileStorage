@@ -5,9 +5,9 @@ namespace FileStorage.Models
 {
     public class Context : DbContext
     {
-        public DbSet<Folders> DbSetFolders { get; set; }
-        public DbSet<Files> DbSetFiles { get; set; }
-        public DbSet<FileExtention> DbSetFileExtentions { get; set; }
+        public DbSet<Folder> Folders { get; set; }
+        public DbSet<File> Files { get; set; }
+        public DbSet<FileExtention> FileExtentions { get; set; }
 
         public Context() { }
 
@@ -17,20 +17,27 @@ namespace FileStorage.Models
             Database.EnsureCreated();
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseNpgsql();
-        //    base.OnConfiguring(optionsBuilder);
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql();
+            base.OnConfiguring(optionsBuilder);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<FileExtention>(b => { b.HasKey(m => m.ExtentionId); });
-            modelBuilder.Entity<Files>(b => { b.HasKey(m => m.FileId); });
-            modelBuilder.Entity<Folders>(b => { b.HasKey(m => m.FolderId); });
-            //modelbuilder.Property(u => u.Login)
+            modelBuilder.Entity<File>(b => { b.HasKey(m => m.FileId); });
+            modelBuilder.Entity<Folder>(b => { b.HasKey(m => m.FolderId); });
+            modelBuilder.Entity<Folder>().Property(m => m.Name).HasColumnType("character varying");
+            modelBuilder.Entity<Folder>().Property(m => m.FolderParentNameId).HasColumnType("character varying");
+            modelBuilder.Entity<FileExtention>().Property(m => m.Name).HasColumnType("character varying");
+            modelBuilder.Entity<File>().Property(m => m.Name).HasColumnType("character varying");
+            modelBuilder.Entity<File>().Property(m => m.Description).HasColumnType("character varying");
+            modelBuilder.Entity<File>().Property(m => m.Content).HasColumnType("character varying");
+
+
         }
     }
 }
