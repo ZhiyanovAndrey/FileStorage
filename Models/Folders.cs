@@ -8,7 +8,7 @@
 
        
 
-        // папка принадлежит файлу, покажем БД что это ключ на Files ниже
+        // папка принадлежит файлу, покажем БД что это ключ на Files
         public int FileId { get; set; }
         public Files? files { get; set; }
 

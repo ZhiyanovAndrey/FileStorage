@@ -1,5 +1,6 @@
 using FileStorage.Models;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,22 +9,28 @@ builder.Services.AddControllersWithViews();
 
 
 
-// получаем строку подключения из файла конфигурации
-string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+//// получаем строку подключения из файла конфигурации
+//string connection = builder.Configuration.GetConnectionString("DbConnection");
 
-// добавляем контекст ApplicationContext в качестве сервиса в приложение
-builder.Services.AddDbContext<Context>(options => options.UseNpgsql(connection));
+//// добавляем контекст ApplicationContext в качестве сервиса в приложение
+//builder.Services.AddDbContext<Context>(options => options.UseNpgsql(connection));
 
-
-//// или так регистрация БД
-//builder.Services.AddDbContext<Context>(options =>
-//{
-//    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection"));
-
-
-//}
-
+//builder.Services.Configure<ConnectionStrings>(
+//    builder.Configuration.GetSection(nameof(ConnectionStrings))
 //);
+
+
+
+
+// или так регистрация БД
+builder.Services.AddDbContext<Context>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection"));
+
+
+}
+
+);
 
 var app = builder.Build();
 
