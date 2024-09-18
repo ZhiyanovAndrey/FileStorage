@@ -2,7 +2,7 @@
 {
     public class Files
     {
-        public int Id { get; set; }     
+        public int FileId { get; set; }     
         public string Name { get; set; }    
         public string? Description { get; set; }
         public string ExtentionId { get; set; }
