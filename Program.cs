@@ -9,20 +9,7 @@ builder.Services.AddControllersWithViews();
 
 
 
-//// получаем строку подключения из файла конфигурации
-//string connection = builder.Configuration.GetConnectionString("DbConnection");
-
-//// добавляем контекст ApplicationContext в качестве сервиса в приложение
-//builder.Services.AddDbContext<Context>(options => options.UseNpgsql(connection));
-
-//builder.Services.Configure<ConnectionStrings>(
-//    builder.Configuration.GetSection(nameof(ConnectionStrings))
-//);
-
-
-
-
-// или так регистрация БД
+// регистрация БД
 builder.Services.AddDbContext<Context>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection"));

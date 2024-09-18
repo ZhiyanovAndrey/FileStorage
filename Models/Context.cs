@@ -9,7 +9,7 @@ namespace FileStorage.Models
         public DbSet<File> Files { get; set; }
         public DbSet<FileExtention> FileExtentions { get; set; }
 
-        public Context() { }
+        //public Context() { }
 
 
         public Context(DbContextOptions<Context> options) : base(options)
