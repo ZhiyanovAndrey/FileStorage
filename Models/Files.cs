@@ -4,14 +4,14 @@
     {
         public int Id { get; set; }     
         public string Name { get; set; }    
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public string ExtentionId { get; set; }
-        public int FolderId { get; set; }
-        public string Content { get; set; }
+        public int? FolderId { get; set; }
+        public string? Content { get; set; }
 
-        public ICollection IcCollection <Folders> Folders  { get; set; } // одной папке принадлежит много файлов
+        public ICollection <Folders?> Folders  { get; set; } // одной папке принадлежит много файлов
 
-        virtual public FileExtention? fileExtention { get; set; } // многие ко многим
+        public ICollection <FileExtention> fileExtention { get; set; } // многие ко многим
 
     }
 }
