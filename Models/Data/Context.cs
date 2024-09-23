@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace FileStorage.Models
+namespace FileStorage.Models.Data
 {
     public class Context : DbContext
     {

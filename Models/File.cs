@@ -13,5 +13,19 @@
 
         public ICollection <FileExtention> fileExtention { get; set; } // многие ко многим
 
+        public File(File file)
+        {
+                
+        }
+
+        public File(string Name, string? Description, int ExtentionId, int? FolderId, string? Content)
+        {
+            Name=this.Name;
+            Description=this.Description;
+            ExtentionId=this.ExtentionId;
+            FolderId=this.FolderId; 
+            Content=this.Content;   
+                
+        }
     }
 }

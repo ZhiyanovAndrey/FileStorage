@@ -1,4 +1,4 @@
-using FileStorage.Models;
+using FileStorage.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
