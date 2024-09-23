@@ -1,4 +1,6 @@
-﻿namespace FileStorage.Models.Data
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace FileStorage.Models.Data
 {
     public class FileService
     {
@@ -28,18 +30,30 @@
 
         }
 
-        //public async Task<Customer?> DeleteCustomerAsync(int id)
-        //{
-        //    Customer? customer = await _db.Customers.FirstOrDefaultAsync(c => c.Customerid == id);
-        //    if (customer != null)
-        //    {
-        //        _db.Customers.Remove(customer);
-        //        await _db.SaveChangesAsync();
-        //    }
-        //    return customer;
-        //}
+        public async Task<File?> DeleteFileAsync(int id)
+        {
+            File? file = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
+            if (file != null)
+            {
+                _db.Files.Remove(file);
+                await _db.SaveChangesAsync();
+            }
+            return file; //допускает null
+        }
 
+        public async Task<File?> RenameFileAsync(int id, string Name)
+        {
+            File? renamedFile = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
+            if (renamedFile != null)
+            {
+                renamedFile.Name = Name;
+                _db.Files.Update(renamedFile);
+                await _db.SaveChangesAsync();
+            }
+            return renamedFile;
+        }
 
+       
 
 
 
