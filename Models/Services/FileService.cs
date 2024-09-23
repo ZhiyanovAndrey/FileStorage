@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FileStorage.Models.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace FileStorage.Models.Data
+namespace FileStorage.Models.Services
 {
     public class FileService
     {
@@ -16,7 +17,7 @@ namespace FileStorage.Models.Data
 
         }
 
-     
+
 
         public async Task<File> CreateFileAsync(File file)
         {
@@ -53,7 +54,7 @@ namespace FileStorage.Models.Data
             return renamedFile;
         }
 
-       
+
 
 
 
