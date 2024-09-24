@@ -45,7 +45,7 @@ namespace FileStorage.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrderAsync(int id)
         {
-            var result = await _fileService.;
+            var result = await _fileService.DeleteFileAsync(id);
             return result == null ? NotFound() : Ok();
 
         }
