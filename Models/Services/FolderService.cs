@@ -29,13 +29,13 @@ namespace FileStorage.Models.Services
 
         public async Task<FolderModel?> DeleteFolderAsync(int id)
         {
-            FolderModel? Folder = await _db.Folders.FirstOrDefaultAsync(f => f.FolderId == id);
-            if (Folder != null)
+            FolderModel? folder = await _db.Folders.FirstOrDefaultAsync(f => f.FolderId == id);
+            if (folder != null)
             {
-                _db.Folders.Remove(Folder);
+                _db.Folders.Remove(folder);
                 await _db.SaveChangesAsync();
             }
-            return Folder; //допускает null
+            return folder; //допускает null
         }
 
     }

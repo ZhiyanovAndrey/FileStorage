@@ -9,7 +9,7 @@
         public int? FolderId { get; set; }
         public string? Content { get; set; }
 
-        public ICollection <Folder?> Folders  { get; set; } // одной папке принадлежит много файлов
+        public ICollection <FolderModel?> Folders  { get; set; } // одной папке принадлежит много файлов
 
         public ICollection <FileExtention> fileExtention { get; set; } // многие ко многим
 

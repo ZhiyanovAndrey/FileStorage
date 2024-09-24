@@ -1,6 +1,6 @@
 ﻿namespace FileStorage.Models
 {
-    public class Folder
+    public class FolderModel
     {
         public int FolderId { get; set; }
         public string Name { get; set; }    
@@ -11,6 +11,10 @@
         // папка принадлежит файлу
         public int FileId { get; set; }
         public FileModel? files { get; set; }
+
+        public FolderModel (FolderModel folder) 
+        { 
+        } 
 
        
 
