@@ -1,6 +1,6 @@
 ﻿namespace FileStorage.Models
 {
-    public class File
+    public class FileModel
     {
         public int FileId { get; set; }     
         public string Name { get; set; }    
@@ -13,12 +13,12 @@
 
         public ICollection <FileExtention> fileExtention { get; set; } // многие ко многим
 
-        public File(File file)
+        public FileModel(FileModel file)
         {
                 
         }
 
-        public File(string Name, string? Description, int ExtentionId, int? FolderId, string? Content)
+        public FileModel(string Name, string? Description, int ExtentionId, int? FolderId, string? Content)
         {
             Name=this.Name;
             Description=this.Description;

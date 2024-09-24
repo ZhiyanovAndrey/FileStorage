@@ -14,15 +14,14 @@ namespace FileStorage.Models.Services
         public FileService(Context db)
         {
             _db = db;
-
         }
 
 
 
-        public async Task<File> CreateFileAsync(File file)
+        public async Task<FileModel> CreateFileAsync(FileModel file)
         {
 
-            File newFile = new File(file);
+            FileModel newFile = new FileModel(file);
             await _db.Files.AddAsync(newFile);
             await _db.SaveChangesAsync();
 
@@ -31,9 +30,9 @@ namespace FileStorage.Models.Services
 
         }
 
-        public async Task<File?> DeleteFileAsync(int id)
+        public async Task<FileModel?> DeleteFileAsync(int id)
         {
-            File? file = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
+            FileModel? file = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
             if (file != null)
             {
                 _db.Files.Remove(file);
@@ -42,9 +41,9 @@ namespace FileStorage.Models.Services
             return file; //допускает null
         }
 
-        public async Task<File?> RenameFileAsync(int id, string Name)
+        public async Task<FileModel?> RenameFileAsync(int id, string Name)
         {
-            File? renamedFile = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
+            FileModel? renamedFile = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
             if (renamedFile != null)
             {
                 renamedFile.Name = Name;

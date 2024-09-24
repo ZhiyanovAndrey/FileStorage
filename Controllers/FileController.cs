@@ -1,10 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FileStorage.Models;
+using FileStorage.Models.Data;
+using FileStorage.Models.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FileStorage.Controllers
 {
     public class FileController : Controller
     {
+
+        private readonly FileService _fileService;
+
+        public FileController(Context db)
+        {
+            _fileService = new FileService(db);
+
+        }
+
+
         // GET: FileController
         public ActionResult Index()
         {
@@ -23,17 +36,38 @@ namespace FileStorage.Controllers
             return View();
         }
 
-        // API POST: FileController/Create
-        [HttpPost]
-        public IActionResult CreateUser([FromBody] UserModel userModel) // UserModel получаем из тела запроса
+
+
+
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrderAsync(int id)
         {
-            if (userModel != null)
+            var result = await _fileService.;
+            return result == null ? NotFound() : Ok();
+
+        }
+
+
+        // из своего API POST: FileController/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] FileModel fileModel)
+        {
+            if (fileModel != null)
             {
-                // получим User из фронта UserModel
-                bool result = _usersService.Create(userModel);
-                return result ? Ok() : NotFound();
+                try
+                {
+                    var result = await _fileService.CreateFileAsync(fileModel);
+                    return  Ok(result);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            return BadRequest();
+            return BadRequest();    
         }
 
         // POST: FileController/Create

@@ -10,7 +10,7 @@
 
         // папка принадлежит файлу
         public int FileId { get; set; }
-        public File? files { get; set; }
+        public FileModel? files { get; set; }
 
        
 

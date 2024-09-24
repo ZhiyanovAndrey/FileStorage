@@ -22,6 +22,30 @@ namespace FileStorage.Controllers
             return Ok($"Привет! Сервер запущен {DateTime.Now.ToString("D")} в {DateTime.Now.ToString("t")}");
         }
 
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrderAsync([FromBody] OrderModel orderModel)
+        {
+
+            if (orderModel != null)
+            {
+                try
+                {
+                    var result = await _OrderService.CreateOrderAsync(orderModel); // метод расширения CreateOrderAsync принимающий тип OrderService
+                    return Ok(result);
+
+                }
+                catch (Exception ex) //создать класс ValidationException
+                {
+
+                    return BadRequest(ex.Message);
+                }
+            }
+            return BadRequest();
+        }
+
+
         //// запрос на создание User 
         //[HttpPost]
         //public IActionResult CreateUser([FromBody] UserModel userModel) // UserModel получаем из тела запроса
