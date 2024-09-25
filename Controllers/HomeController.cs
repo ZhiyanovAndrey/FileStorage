@@ -28,5 +28,12 @@ namespace FileStorage.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Test()
+        {
+            string t = $"";
+            return Ok($"Привет! Сервер запущен {DateTime.Now.ToString("D")} в {DateTime.Now.ToString("t")}");
+        }
+
     }
 }

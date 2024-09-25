@@ -1,5 +1,7 @@
 ﻿using FileStorage.Models.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace FileStorage.Models.Services
 {
@@ -17,6 +19,29 @@ namespace FileStorage.Models.Services
         }
 
 
+
+        //[HttpGet("customers/{phone}")]
+        //[ResponseCache(Location = ResponseCacheLocation.Client, Duration = 60)]
+        //public IActionResult GetCustomerByPhone(string phone)
+        //{
+        //    var customer = _Services.GetCustomerByPhoneAsync(phone);
+
+        //    return customer == null ? NotFound() : Ok(customer);
+        //}
+
+        //public async Task<FileModel> GetFileAsync(string phone)
+        //{
+
+        //    Customer? customer = await _db.Customers.FirstOrDefaultAsync(c => c.Phone == phone);
+        //    return customer?.ToDto();
+        //}
+
+        //public async Task<FileModel> GetAllFileAsync(string phone)
+        //{
+        //    return await _db.Files.ToListAsync();
+
+ 
+        //}
 
         public async Task<FileModel> CreateFileAsync(FileModel file)
         {

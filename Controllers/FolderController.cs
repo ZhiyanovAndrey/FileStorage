@@ -17,8 +17,8 @@ namespace FileStorage.Controllers
 
         }
         // тестовый запрос строка
-        [AllowAnonymous] // не требует авторизации
-        [HttpGet("test")]
+   
+      
         public IActionResult Test()
         {
             string t = $"";
