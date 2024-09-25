@@ -1,4 +1,6 @@
-﻿using FileStorage.Models.Data;
+﻿using FileStorage.Models;
+using FileStorage.Models.Data;
+using FileStorage.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,11 +9,12 @@ namespace FileStorage.Controllers
     public class FolderController : Controller
     {
 
-        private readonly Context _db;
+        private readonly FolderService _folderService;
+
         public FolderController(Context db)
         {
-            _db = db;
-         
+            _folderService = new FolderService(db);
+
         }
         // тестовый запрос строка
         [AllowAnonymous] // не требует авторизации
@@ -25,20 +28,18 @@ namespace FileStorage.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrderAsync([FromBody] OrderModel orderModel)
+        public async Task<IActionResult> Create([FromBody] FolderModel folderModel)
         {
 
-            if (orderModel != null)
+            if (folderModel != null)
             {
                 try
                 {
-                    var result = await _OrderService.CreateOrderAsync(orderModel); // метод расширения CreateOrderAsync принимающий тип OrderService
+                    var result = await _folderService.CreateFolderAsync(folderModel); // метод расширения CreateOrderAsync принимающий тип OrderService
                     return Ok(result);
-
                 }
-                catch (Exception ex) //создать класс ValidationException
+                catch (Exception ex) 
                 {
-
                     return BadRequest(ex.Message);
                 }
             }
