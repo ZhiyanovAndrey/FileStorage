@@ -3,7 +3,6 @@ using FileStorage.Models.Data;
 using FileStorage.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FileStorage.API_Controllers
 {
@@ -30,8 +29,15 @@ namespace FileStorage.API_Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            var customer = _fileService.GetFileByIdAsync(id);
+            return customer == null ? NotFound() : Ok(customer);
         }
+
+        //[HttpGet("customers/{phone}")]
+        //[ResponseCache(Location = ResponseCacheLocation.Client, Duration = 60)]
+        //public IActionResult GetCustomerByPhone(string phone)
+        //{
+        //}
 
         // POST api/<FileController>
         [HttpPost]
@@ -42,14 +48,14 @@ namespace FileStorage.API_Controllers
                 try
                 {
                     var result = await _fileService.CreateFileAsync(fileModel);
-                    return  Ok(result);
+                    return Ok(result);
                 }
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
             }
-            return BadRequest();    
+            return BadRequest();
         }
 
         // PUT api/<FileController>/5
@@ -60,8 +66,13 @@ namespace FileStorage.API_Controllers
 
         // DELETE api/<FileController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var result = await _fileService.DeleteFileAsync(id);
+            return result == null ? NotFound() : Ok();
         }
+
+
+
     }
 }
