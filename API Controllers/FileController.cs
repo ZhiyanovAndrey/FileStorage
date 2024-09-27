@@ -29,17 +29,12 @@ namespace FileStorage.API_Controllers
 
         // GET api/<FileController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task <IActionResult> Get(int id)
         {
-            var file = _fileService.GetFileByIdAsync(id);
+            var file = await _fileService.GetFileByIdAsync(id);
             return file == null ? NotFound() : Ok(file);
         }
 
-        //[HttpGet("customers/{phone}")]
-        //[ResponseCache(Location = ResponseCacheLocation.Client, Duration = 60)]
-        //public IActionResult GetCustomerByPhone(string phone)
-        //{
-        //}
 
         // POST api/<FileController>
         [HttpPost]

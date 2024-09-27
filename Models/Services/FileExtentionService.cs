@@ -11,37 +11,37 @@ namespace FileStorage.Models.Services
             _db = db;
         }
 
-        public async Task<FileModel?> GetFileByIdAsync(int id)
-        {
-            return await _db.Files.FirstOrDefaultAsync(c => c.FileId == id);
-        }
+        //public async Task<FileExtentionModel?> GetFileExtentionByIdAsync(int id)
+        //{
+        //    return await _db.FileExtentions.FirstOrDefaultAsync(c => c.FileId == id);
+        //}
 
-        public async Task<List<FileModel>> GetAllFileAsync()
-        {
-            return await _db.Files.ToListAsync();
-        }
+        //public async Task<List<FileExtentionModel>> GetAllFileAsync()
+        //{
+        //    return await _db.FileExtentions.ToListAsync();
+        //}
 
-        public async Task<FileModel> CreateFileAsync(FileModel file)
-        {
+        //public async Task<FileExtentionModel> CreateFileAsync(FileExtentionModel file)
+        //{
 
-            FileModel newFile = new FileModel(file);
-            await _db.Files.AddAsync(newFile);
-            await _db.SaveChangesAsync();
+        //    FileExtentionModel newFile = new FileExtentionModel(file);
+        //    await _db.FileExtentions.AddAsync(newFile);
+        //    await _db.SaveChangesAsync();
 
-            return newFile;
+        //    return newFile;
 
 
-        }
+        //}
 
-        public async Task<FileModel?> DeleteFileAsync(int id)
-        {
-            FileModel? file = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
-            if (file != null)
-            {
-                _db.Files.Remove(file);
-                await _db.SaveChangesAsync();
-            }
-            return file; //допускает null
-        }
+        //public async Task<FileExtentionModel?> DeleteFileAsync(int id)
+        //{
+        //    FileExtentionModel? file = await _db.FileExtentions.FirstOrDefaultAsync(f => f.FileId == id);
+        //    if (file != null)
+        //    {
+        //        _db.FileExtentions.Remove(file);
+        //        await _db.SaveChangesAsync();
+        //    }
+        //    return file; //допускает null
+        //}
     }
 }
