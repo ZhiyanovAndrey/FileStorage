@@ -1,15 +1,12 @@
 ﻿using FileStorage.Models.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.IO;
 
 namespace FileStorage.Models.Services
 {
-    public class FileService
+    public class FileExtentionService
     {
         private readonly Context _db;
 
-        public FileService(Context db)
+        public FileExtentionService(Context db)
         {
             _db = db;
         }
@@ -46,26 +43,5 @@ namespace FileStorage.Models.Services
             }
             return file; //допускает null
         }
-
-        public async Task<FileModel?> RenameFileAsync(int id, string Name)
-        {
-            FileModel? renamedFile = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
-            if (renamedFile != null)
-            {
-                renamedFile.Name = Name;
-                _db.Files.Update(renamedFile);
-                await _db.SaveChangesAsync();
-            }
-            return renamedFile;
-        }
-
-
-
-
-
-
-
-
-
     }
 }
