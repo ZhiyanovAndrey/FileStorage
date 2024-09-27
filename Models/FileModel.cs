@@ -11,7 +11,7 @@
 
         public ICollection <FolderModel?> Folders  { get; set; } // одной папке принадлежит много файлов
 
-        public ICollection <FileExtention> fileExtention { get; set; } // многие ко многим
+        public ICollection <FileExtentionModel> fileExtention { get; set; } // многие ко многим
 
         public FileModel(FileModel file)
         {

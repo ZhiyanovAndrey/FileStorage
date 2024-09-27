@@ -2,7 +2,7 @@
 
 namespace FileStorage.Models
 {
-    public class FileExtention
+    public class FileExtentionModel
     {
 
         public int ExtentionId { get; set; }
@@ -13,10 +13,10 @@ namespace FileStorage.Models
         public ICollection<FileModel> files { get; set; } // многие ко многим
 
 
-        public FileExtention() { }
+        public FileExtentionModel() { }
 
 
-        public FileExtention(FileExtention fileExtentionModel)
+        public FileExtentionModel(FileExtentionModel fileExtentionModel)
         {
             ExtentionId = fileExtentionModel.ExtentionId;
             Name = fileExtentionModel.Name;
