@@ -23,7 +23,7 @@ namespace FileStorage.Models.Services
             return await _db.Files.FirstOrDefaultAsync(c => c.FileId == id);
         }
 
-        public async Task<List?> GetAllFileAsync(string phone)
+        public async Task<List<FileModel>> GetAllFileAsync()
         {
             return await _db.Files.ToListAsync();
         }

@@ -20,17 +20,19 @@ namespace FileStorage.API_Controllers
 
         // GET: api/<FileController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<FileModel>> GetFiles()
         {
-            return new string[] { "value1", "value2" };
+            return await _fileService.GetAllFileAsync();
+           
         }
+
 
         // GET api/<FileController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            var customer = _fileService.GetFileByIdAsync(id);
-            return customer == null ? NotFound() : Ok(customer);
+            var file = _fileService.GetFileByIdAsync(id);
+            return file == null ? NotFound() : Ok(file);
         }
 
         //[HttpGet("customers/{phone}")]
