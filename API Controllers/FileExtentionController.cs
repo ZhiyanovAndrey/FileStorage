@@ -19,23 +19,21 @@ namespace FileStorage.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<FileModel>> Get()
+        public async Task<IEnumerable<FileExtentionModel>> Get()
         {
             return await _fileExtentionService.GetAllFileExtentionsFileAsync();
 
         }
 
 
-
-        // POST api/<FileController>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] FileModel fileModel)
+        public async Task<IActionResult> Create([FromBody] FileExtentionModel fileExtentionModel)
         {
-            if (fileModel != null)
+            if (fileExtentionModel != null)
             {
                 try
                 {
-                    var result = await _fileExtentionService.CreateFileAsync(fileModel);
+                    var result = await _fileExtentionService.CreateFileExtentionAsync(fileExtentionModel);
                     return Ok(result);
                 }
                 catch (Exception ex)
