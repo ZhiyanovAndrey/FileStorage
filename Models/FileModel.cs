@@ -8,23 +8,24 @@
         public int ExtentionId { get; set; }
         public int? FolderId { get; set; }
         public string? Content { get; set; }
+        public FileExtentionModel FileExtentionModel { get; set; } // одному расширению принадлежит много файлов
 
         public ICollection <FolderModel?> Folders  { get; set; } // одной папке принадлежит много файлов
 
-        public ICollection <FileExtentionModel> fileExtention { get; set; } // многие ко многим
+        //public ICollection <FileExtentionModel> fileExtention { get; set; } // многие ко многим
 
-        public FileModel(FileModel file)
+        public FileModel()
         {
                 
         }
-
-        public FileModel(string Name, string? Description, int ExtentionId, int? FolderId, string? Content)
+        //string Name, string? Description, int ExtentionId, int? FolderId, string? Content
+        public FileModel(FileModel fileModel)
         {
-            Name=this.Name;
-            Description=this.Description;
-            ExtentionId=this.ExtentionId;
-            FolderId=this.FolderId; 
-            Content=this.Content;   
+            Name= fileModel.Name;
+            Description= fileModel.Description;
+            ExtentionId= fileModel.ExtentionId;
+            FolderId= fileModel.FolderId; 
+            Content= fileModel.Content;   
                 
         }
     }
