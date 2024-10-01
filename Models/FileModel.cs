@@ -1,5 +1,8 @@
-﻿namespace FileStorage.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FileStorage.Models
 {
+    [Table("File")]
     public class FileModel
     {
         public int FileId { get; set; }     
@@ -7,7 +10,7 @@
         public string? Description { get; set; }
         public string? Content { get; set; }
 
-        public int ExtentionId { get; set; }
+        public int FileExtentionId { get; set; }
         public virtual FileExtentionModel FileExtentionModel { get; set; } = null!; // одному расширению принадлежит много файлов          
 
         public int FolderId { get; set; }
@@ -23,7 +26,7 @@
         {
             Name= fileModel.Name;
             Description= fileModel.Description;
-            ExtentionId= fileModel.ExtentionId;
+            FileExtentionId = fileModel.FileExtentionId;
             FolderId= fileModel.FolderId; 
             Content= fileModel.Content;   
                 

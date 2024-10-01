@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FileStorage.Models
 {
+    [Table("FileExtention")]
     public class FileExtentionModel
     {
 
-        public int ExtentionId { get; set; }
+        public int FileExtentionId { get; set; }
         public string Name { get; set; }
         public byte? Foto { get; set; }
 
@@ -18,7 +20,7 @@ namespace FileStorage.Models
 
         public FileExtentionModel(FileExtentionModel fileExtentionModel) 
         {
-            ExtentionId = fileExtentionModel.ExtentionId;
+            FileExtentionId = fileExtentionModel.FileExtentionId;
             Name = fileExtentionModel.Name;
             Foto = fileExtentionModel.Foto;
         }
