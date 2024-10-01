@@ -8,10 +8,10 @@
         public string? Content { get; set; }
 
         public int ExtentionId { get; set; }
-        public FileExtentionModel FileExtentionModel { get; set; } // одному расширению принадлежит много файлов          
-        
+        public virtual FileExtentionModel FileExtentionModel { get; set; } = null!; // одному расширению принадлежит много файлов          
+
         public int FolderId { get; set; }
-        public FolderModel? Folder { get; set; } // файл принадлежит одной папке
+        public virtual FolderModel? FolderModel { get; set; } = null!; // файл принадлежит одной папке
 
 
         public FileModel()
