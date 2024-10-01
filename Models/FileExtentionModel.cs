@@ -10,13 +10,13 @@ namespace FileStorage.Models
         public byte? Foto { get; set; }
 
 
-        public ICollection<FileModel> files { get; set; } 
+        public ICollection<FileModel> files { get; set; } // одному расширению принадлежит много файлов
 
 
         public FileExtentionModel() { }
 
 
-        public FileExtentionModel(FileExtentionModel fileExtentionModel)
+        public FileExtentionModel(FileExtentionModel fileExtentionModel) 
         {
             ExtentionId = fileExtentionModel.ExtentionId;
             Name = fileExtentionModel.Name;

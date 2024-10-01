@@ -5,14 +5,14 @@
         public int FileId { get; set; }     
         public string Name { get; set; }    
         public string? Description { get; set; }
-        public int ExtentionId { get; set; }
-        public int? FolderId { get; set; }
         public string? Content { get; set; }
-        public FileExtentionModel FileExtentionModel { get; set; } // одному расширению принадлежит много файлов
 
-        public ICollection <FolderModel?> Folders  { get; set; } // одной папке принадлежит много файлов
+        public int ExtentionId { get; set; }
+        public FileExtentionModel FileExtentionModel { get; set; } // одному расширению принадлежит много файлов          
+        
+        public int FolderId { get; set; }
+        public FolderModel? Folder { get; set; } // файл принадлежит одной папке
 
-        //public ICollection <FileExtentionModel> fileExtention { get; set; } // многие ко многим
 
         public FileModel()
         {

@@ -6,11 +6,9 @@
         public string Name { get; set; }    
         public string FolderParentNameId { get; set; }
 
-       
+        public ICollection<FileModel?> Files { get; set; } // одной папке принадлежит много файлов
 
-        // папка принадлежит файлу
-        public int FileId { get; set; }
-        public FileModel? files { get; set; }
+
 
         public FolderModel() { }
 
