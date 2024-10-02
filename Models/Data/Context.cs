@@ -27,8 +27,8 @@ namespace FileStorage.Models.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<FileExtentionModel>(b => { b.HasKey(m => m.FileExtentionId); });
-            modelBuilder.Entity<FileModel>(b => { b.HasKey(m => m.FileId); });
+            modelBuilder.Entity<FileExtentionModel>(b => { b.HasKey(m => m.FileExtentionModelId); });
+            modelBuilder.Entity<FileModel>(b => { b.HasKey(m => m.FileModelId); });
             modelBuilder.Entity<FolderModel>(b => { b.HasKey(m => m.FolderModelId); });
             modelBuilder.Entity<FolderModel>().Property(m => m.Name).HasColumnType("character varying");
             modelBuilder.Entity<FolderModel>().Property(m => m.FolderParentNameId).HasColumnType("character varying");

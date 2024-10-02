@@ -15,68 +15,68 @@ namespace FileStorage.Migrations
                 name: "FileExtention",
                 columns: table => new
                 {
-                    FileExtentionId = table.Column<int>(type: "integer", nullable: false)
+                    FileExtentionModelId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying", nullable: false),
                     Foto = table.Column<byte>(type: "smallint", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileExtention", x => x.FileExtentionId);
+                    table.PrimaryKey("PK_FileExtention", x => x.FileExtentionModelId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Folder",
                 columns: table => new
                 {
-                    FolderId = table.Column<int>(type: "integer", nullable: false)
+                    FolderModelId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying", nullable: false),
                     FolderParentNameId = table.Column<string>(type: "character varying", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Folder", x => x.FolderId);
+                    table.PrimaryKey("PK_Folder", x => x.FolderModelId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "File",
                 columns: table => new
                 {
-                    FileId = table.Column<int>(type: "integer", nullable: false)
+                    FileModelId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying", nullable: false),
                     Description = table.Column<string>(type: "character varying", nullable: true),
                     Content = table.Column<string>(type: "character varying", nullable: true),
-                    FileExtentionId = table.Column<int>(type: "integer", nullable: false),
-                    FileExtentionModelFileExtentionId = table.Column<int>(type: "integer", nullable: true),
-                    FolderId = table.Column<int>(type: "integer", nullable: false),
-                    FolderModelFolderId = table.Column<int>(type: "integer", nullable: true)
+                    FileExtentionModelId = table.Column<int>(type: "integer", nullable: false),
+                    FolderModelId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_File", x => x.FileId);
+                    table.PrimaryKey("PK_File", x => x.FileModelId);
                     table.ForeignKey(
-                        name: "FK_File_FileExtention_FileExtentionModelFileExtentionId",
-                        column: x => x.FileExtentionModelFileExtentionId,
+                        name: "FK_File_FileExtention_FileExtentionModelId",
+                        column: x => x.FileExtentionModelId,
                         principalTable: "FileExtention",
-                        principalColumn: "FileExtentionId");
+                        principalColumn: "FileExtentionModelId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_File_Folder_FolderModelFolderId",
-                        column: x => x.FolderModelFolderId,
+                        name: "FK_File_Folder_FolderModelId",
+                        column: x => x.FolderModelId,
                         principalTable: "Folder",
-                        principalColumn: "FolderId");
+                        principalColumn: "FolderModelId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_File_FileExtentionModelFileExtentionId",
+                name: "IX_File_FileExtentionModelId",
                 table: "File",
-                column: "FileExtentionModelFileExtentionId");
+                column: "FileExtentionModelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_File_FolderModelFolderId",
+                name: "IX_File_FolderModelId",
                 table: "File",
-                column: "FolderModelFolderId");
+                column: "FolderModelId");
         }
 
         /// <inheritdoc />

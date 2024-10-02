@@ -16,7 +16,7 @@ namespace FileStorage.Models.Services
 
         public async Task<FileModel?> GetFileByIdAsync(int id)
         {
-            return await _db.Files.FirstOrDefaultAsync(c => c.FileId == id);
+            return await _db.Files.FirstOrDefaultAsync(c => c.FileModelId == id);
         }
 
         public async Task<List<FileModel>> GetAllFileAsync()
@@ -38,7 +38,7 @@ namespace FileStorage.Models.Services
 
         public async Task<FileModel?> DeleteFileAsync(int id)
         {
-            FileModel? file = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
+            FileModel? file = await _db.Files.FirstOrDefaultAsync(f => f.FileModelId == id);
             if (file != null)
             {
                 _db.Files.Remove(file);
@@ -49,7 +49,7 @@ namespace FileStorage.Models.Services
 
         public async Task<FileModel?> RenameFileAsync(int id, string Name)
         {
-            FileModel? renamedFile = await _db.Files.FirstOrDefaultAsync(f => f.FileId == id);
+            FileModel? renamedFile = await _db.Files.FirstOrDefaultAsync(f => f.FileModelId == id);
             if (renamedFile != null)
             {
                 renamedFile.Name = Name;

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FileStorage.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241002072045_init")]
+    [Migration("20241002134155_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace FileStorage.Migrations
 
             modelBuilder.Entity("FileStorage.Models.FileExtentionModel", b =>
                 {
-                    b.Property<int>("FileExtentionId")
+                    b.Property<int>("FileExtentionModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FileExtentionId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FileExtentionModelId"));
 
                     b.Property<byte?>("Foto")
                         .HasColumnType("smallint");
@@ -40,18 +40,18 @@ namespace FileStorage.Migrations
                         .IsRequired()
                         .HasColumnType("character varying");
 
-                    b.HasKey("FileExtentionId");
+                    b.HasKey("FileExtentionModelId");
 
                     b.ToTable("FileExtention");
                 });
 
             modelBuilder.Entity("FileStorage.Models.FileModel", b =>
                 {
-                    b.Property<int>("FileId")
+                    b.Property<int>("FileModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FileId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FileModelId"));
 
                     b.Property<string>("Content")
                         .HasColumnType("character varying");
@@ -59,38 +59,32 @@ namespace FileStorage.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("character varying");
 
-                    b.Property<int>("FileExtentionId")
+                    b.Property<int>("FileExtentionModelId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("FileExtentionModelFileExtentionId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FolderId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("FolderModelFolderId")
+                    b.Property<int>("FolderModelId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("character varying");
 
-                    b.HasKey("FileId");
+                    b.HasKey("FileModelId");
 
-                    b.HasIndex("FileExtentionModelFileExtentionId");
+                    b.HasIndex("FileExtentionModelId");
 
-                    b.HasIndex("FolderModelFolderId");
+                    b.HasIndex("FolderModelId");
 
                     b.ToTable("File");
                 });
 
             modelBuilder.Entity("FileStorage.Models.FolderModel", b =>
                 {
-                    b.Property<int>("FolderId")
+                    b.Property<int>("FolderModelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FolderId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FolderModelId"));
 
                     b.Property<string>("FolderParentNameId")
                         .HasColumnType("character varying");
@@ -99,7 +93,7 @@ namespace FileStorage.Migrations
                         .IsRequired()
                         .HasColumnType("character varying");
 
-                    b.HasKey("FolderId");
+                    b.HasKey("FolderModelId");
 
                     b.ToTable("Folder");
                 });
@@ -108,11 +102,15 @@ namespace FileStorage.Migrations
                 {
                     b.HasOne("FileStorage.Models.FileExtentionModel", "FileExtentionModel")
                         .WithMany("FileModel")
-                        .HasForeignKey("FileExtentionModelFileExtentionId");
+                        .HasForeignKey("FileExtentionModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FileStorage.Models.FolderModel", "FolderModel")
                         .WithMany("Files")
-                        .HasForeignKey("FolderModelFolderId");
+                        .HasForeignKey("FolderModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("FileExtentionModel");
 

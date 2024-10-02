@@ -32,7 +32,7 @@ namespace FileStorage.Models.Services
 
         public async Task<FileExtentionModel?> DeleteFileExtentionAsync(int id)
         {
-            FileExtentionModel? file = await _db.FileExtentions.FirstOrDefaultAsync(f => f.FileExtentionId == id);
+            FileExtentionModel? file = await _db.FileExtentions.FirstOrDefaultAsync(f => f.FileExtentionModelId == id);
             if (file != null)
             {
                 _db.FileExtentions.Remove(file);
