@@ -24,11 +24,11 @@ namespace FileStorage.Migrations
 
             modelBuilder.Entity("FileStorage.Models.FileExtentionModel", b =>
                 {
-                    b.Property<int>("ExtentionId")
+                    b.Property<int>("FileExtentionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ExtentionId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FileExtentionId"));
 
                     b.Property<byte?>("Foto")
                         .HasColumnType("smallint");
@@ -37,7 +37,7 @@ namespace FileStorage.Migrations
                         .IsRequired()
                         .HasColumnType("character varying");
 
-                    b.HasKey("ExtentionId");
+                    b.HasKey("FileExtentionId");
 
                     b.ToTable("FileExtention");
                 });
@@ -56,10 +56,10 @@ namespace FileStorage.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("character varying");
 
-                    b.Property<int>("ExtentionId")
+                    b.Property<int>("FileExtentionId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("FileExtentionModelExtentionId")
+                    b.Property<int?>("FileExtentionModelFileExtentionId")
                         .HasColumnType("integer");
 
                     b.Property<int>("FolderId")
@@ -74,7 +74,7 @@ namespace FileStorage.Migrations
 
                     b.HasKey("FileId");
 
-                    b.HasIndex("FileExtentionModelExtentionId");
+                    b.HasIndex("FileExtentionModelFileExtentionId");
 
                     b.HasIndex("FolderModelFolderId");
 
@@ -105,9 +105,7 @@ namespace FileStorage.Migrations
                 {
                     b.HasOne("FileStorage.Models.FileExtentionModel", "FileExtentionModel")
                         .WithMany("FileModel")
-                        .HasForeignKey("FileExtentionModelExtentionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FileExtentionModelFileExtentionId");
 
                     b.HasOne("FileStorage.Models.FolderModel", "FolderModel")
                         .WithMany("Files")

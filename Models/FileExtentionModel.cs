@@ -7,7 +7,7 @@ namespace FileStorage.Models
     public class FileExtentionModel
     {
 
-        public int FileExtentionId { get; set; }
+        public int FileExtentionModelId { get; set; }
         public string Name { get; set; }
         public byte? Foto { get; set; }
 
@@ -20,7 +20,7 @@ namespace FileStorage.Models
 
         public FileExtentionModel(FileExtentionModel fileExtentionModel) 
         {
-            FileExtentionId = fileExtentionModel.FileExtentionId;
+            FileExtentionModelId = fileExtentionModel.FileExtentionModelId;
             Name = fileExtentionModel.Name;
             Foto = fileExtentionModel.Foto;
         }

@@ -5,7 +5,7 @@ namespace FileStorage.Models
     [Table("Folder")]
     public class FolderModel
     {
-        public int FolderId { get; set; }
+        public int FolderModelId { get; set; }
         public string Name { get; set; }    
         public string? FolderParentNameId { get; set; }
 
@@ -17,7 +17,7 @@ namespace FileStorage.Models
 
         public FolderModel (FolderModel folder) 
         { 
-            FolderId=folder.FolderId;   
+            FolderModelId=folder.FolderModelId;   
             Name=folder.Name;
             FolderParentNameId=folder.FolderParentNameId;
         } 
