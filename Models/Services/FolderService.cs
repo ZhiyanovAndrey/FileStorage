@@ -14,6 +14,15 @@ namespace FileStorage.Models.Services
         }
 
 
+        public async Task<FolderModel?> GetFolderByIdAsync(int id)
+        {
+            return await _db.Folders.FirstOrDefaultAsync(c => c.FolderModelId == id);
+        }
+
+        public async Task<List<FolderModel>> GetAllFolderAsync()
+        {
+            return await _db.Folders.ToListAsync();
+        }
 
         public async Task<FolderModel> CreateFolderAsync(FolderModel folder)
         {

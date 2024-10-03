@@ -1,14 +1,15 @@
-﻿using FileStorage.Models;
-using FileStorage.Models.Data;
+﻿using FileStorage.Models.Data;
 using FileStorage.Models.Services;
-using Microsoft.AspNetCore.Authorization;
+using FileStorage.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FileStorage.Controllers
 {
-    public class FolderController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class FolderController : ControllerBase
     {
-
         private readonly FolderService _folderService;
 
         public FolderController(Context db)
@@ -17,14 +18,14 @@ namespace FileStorage.Controllers
 
         }
         // тестовый запрос строка
-   
-      
-        public IActionResult Test()
-        {
-            string t = $"";
-            return Ok($"Привет! Сервер запущен {DateTime.Now.ToString("D")} в {DateTime.Now.ToString("t")}");
-        }
 
+
+        [HttpGet]
+        public async Task<IEnumerable<FolderModel>> Get()
+        {
+            return await _folderService.GetAllFolderAsync();
+
+        }
 
 
         [HttpPost]
@@ -38,13 +39,14 @@ namespace FileStorage.Controllers
                     var result = await _folderService.CreateFolderAsync(folderModel); // метод расширения CreateOrderAsync принимающий тип OrderService
                     return Ok(result);
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
                 }
             }
             return BadRequest();
         }
+
 
 
         //// запрос на создание User 
@@ -85,7 +87,5 @@ namespace FileStorage.Controllers
 
         //}
     }
+
 }
-
-
-
