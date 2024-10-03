@@ -39,7 +39,7 @@ namespace FileStorage.Migrations
 
                     b.HasKey("FileExtentionModelId");
 
-                    b.ToTable("FileExtention");
+                    b.ToTable("FileExtention", (string)null);
                 });
 
             modelBuilder.Entity("FileStorage.Models.FileModel", b =>
@@ -72,7 +72,7 @@ namespace FileStorage.Migrations
 
                     b.HasIndex("FolderModelId");
 
-                    b.ToTable("File");
+                    b.ToTable("File", (string)null);
                 });
 
             modelBuilder.Entity("FileStorage.Models.FolderModel", b =>
@@ -92,7 +92,7 @@ namespace FileStorage.Migrations
 
                     b.HasKey("FolderModelId");
 
-                    b.ToTable("Folder");
+                    b.ToTable("Folder", (string)null);
                 });
 
             modelBuilder.Entity("FileStorage.Models.FileModel", b =>

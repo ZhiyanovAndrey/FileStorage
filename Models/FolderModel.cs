@@ -9,7 +9,7 @@ namespace FileStorage.Models
         public string Name { get; set; }    
         public string? FolderParentNameId { get; set; }
 
-        public virtual ICollection<FileModel> Files { get; set; } = new List<FileModel>();   // одному расширению принадлежит много файлов
+        public virtual ICollection<FileModel> Files { get; set; } = new List<FileModel>();   // одной папке принадлежит много файлов
 
 
 

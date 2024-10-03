@@ -36,7 +36,7 @@ namespace FileStorage.Controllers
             {
                 try
                 {
-                    var result = await _folderService.CreateFolderAsync(folderModel); // метод расширения CreateOrderAsync принимающий тип OrderService
+                    var result = await _folderService.CreateFolderAsync(folderModel);
                     return Ok(result);
                 }
                 catch (Exception ex)

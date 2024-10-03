@@ -14,10 +14,10 @@ namespace FileStorage.Models
         //Foreign key for FileExtentionId
        
         public int FileExtentionModelId { get; set; }
-        public virtual FileExtentionModel? FileExtentionModel { get; set; } = null!; // одному расширению принадлежит много файлов          
+        public virtual FileExtentionModel? FileExtentionModel { get; set; }// = null!; // одному расширению принадлежит много файлов          
 
         public int FolderModelId { get; set; }
-        public virtual FolderModel? FolderModel { get; set; } = null!; // файл принадлежит одной папке
+        public virtual FolderModel? FolderModel { get; set; }// = null!; // файл принадлежит одной папке
 
 
         public FileModel()
@@ -29,9 +29,9 @@ namespace FileStorage.Models
         {
             Name= fileModel.Name;
             Description= fileModel.Description;
+            Content= fileModel.Content;   
             FileExtentionModelId = fileModel.FileExtentionModelId;
             FolderModelId = fileModel.FolderModelId; 
-            Content= fileModel.Content;   
                 
         }
     }
