@@ -7,4 +7,40 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>Привет! Сервер запущен @DateTime.Now.ToString("D") в @DateTime.Now.ToString("t")</p>
 </div>
+
+<div class="row"> 
+    <div class="col-4"><button onclick="test()">загрузить</button></div>
+    <div class="col-8">
+        <<div>
+            <input type="text" id="field1">
+        </div>
+        <div>
+            <input type="text" id="other_field">
+        </div>
+    </div>
+
+    </div>
+    @section Scripts{
+    <script type="text/javascript">
+        function test() {
+            const field = document.getElementById("field1");
+            const fieldValue = field.value;
+            if (!fieldValue) {
+                alert("Поле пустое");
+            }
+            else {
+                alert("Значение поля: " + fieldValue);
+            }
+
+
+
+            $.get('/api/file')
+            .then(function (response) {
+                console.log(response);
+            });
+        }
+
+        
+        </script>
+    }
         
