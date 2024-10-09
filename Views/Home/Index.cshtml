@@ -1,4 +1,8 @@
-﻿@{
+﻿@using FileStorage.Models.Data <!--подключаем модели-->
+@model IEnumerable<FileModel> 
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,6 +11,20 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>Привет! Сервер запущен @DateTime.Now.ToString("D") в @DateTime.Now.ToString("t")</p>
 </div>
+
+<h2>Все файлы</h2> <!--перебераем элементы в модели-->
+@{
+    foreach(var file in Model) 
+    {
+     <div>
+     <h2>Модель: @file.Name</h2>
+     <h2>Модель: @file.Description</h2>
+     <h2>Модель: @file.Content</h2>
+     </div>   
+    }
+    <!--вывести данные в HTML формате-->
+}
+
 
 <div class="row"> 
     <div class="col-4"><button onclick="test()">загрузить</button></div>
