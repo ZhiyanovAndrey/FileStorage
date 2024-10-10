@@ -1,5 +1,6 @@
-﻿@using FileStorage.Models.Data <!--подключаем модели-->
-@model IEnumerable<FileModel> 
+﻿@using FileStorage.API_Controllers <!--подключаем модели-->
+@using FileStorage.Models.Services <!--подключаем модели-->
+@model FileService
 
 
 @{
@@ -14,7 +15,7 @@
 
 <h2>Все файлы</h2> <!--перебераем элементы в модели-->
 @{
-    foreach(var file in Model) 
+    foreach(var file in Model.GetAllFileAsync) 
     {
      <div>
      <h2>Модель: @file.Name</h2>
