@@ -12,11 +12,31 @@
 </div>
 
 <h2>Все файлы</h2> <!--перебераем элементы в модели-->
+<!--далее вставляем блоки из bootstrap     -->
+
+<a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+<p class="h5">Example heading <span class="badge text-bg-warning">New</span></p>
 
 
+@*     @{
+        foreach (var file in Model.GetAllFileAsync)
+        { *@
+
+<div class="d-flex text-body-secondary pt-3">
+    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+    <div class="pb-3 mb-0 small lh-sm border-bottom w-100" id="files">
+        <div class="d-flex justify-content-between">
+            <strong class="text-gray-dark">Full Name</strong>
+            <a href="#">Follow</a>
+        </div>
+        <span class="d-block">fgghhhhhhhh</span>
+    </div>
+</div>
+@*         }
+    } *@
 
 <div class="row"> 
-    <div class="col-4"><button onclick="test()">загрузить</button></div>
+    <div class="col-4"><button>загрузить</button></div>
     <div class="col-8">
         <<div>
             <input type="text" id="field1">
@@ -25,6 +45,7 @@
             <input type="text" id="other_field">
         </div>
     </div>
+
 
     </div>
     @section Scripts{
@@ -46,6 +67,48 @@
                 console.log(response);
             });
         }
+        $("button").on("click", function (e) {
+            e.preventDefault();
+            loadFiles();
+        });
+
+        function loadFiles() {
+            $.ajax("/api/file",
+                {
+                    "dataType": "json",
+                    "method": "GET"
+                })
+                .done(function (files) {
+                    const fileContainerDiv = $("#files");
+                    fileContainerDiv.empty();
+                    for (const file of files) {
+                        const fileDiv = $("div");
+                        fileDiv.html(file.name);
+                        fileDiv.attr("title", file.decription);
+                        fileDiv.css("border", "1px solid green");
+                        fileContainerDiv.append(fileDiv);
+                    }
+                });
+        }
+        // function getFiles(e) {
+        //     e.preventDefault();
+        //     $.ajax("/api/file",
+        //         {
+        //             "dataType": "json",
+        //             "method": "GET"
+        //         })
+        //         .done(function (files) {
+        //             const fileContainerDiv = $("#files");
+        //             fileContainerDiv.empty();
+        //             for (const file of files) {
+        //                 const fileDiv = $("div");
+        //                 fileDiv.html(file.name);
+        //                 fileDiv.attr("title", file.decription);
+        //                 fileDiv.css("border", "1px solid green");
+        //                 fileContainerDiv.append(fileDiv);
+        //             }
+        //         });
+        // }
 
         
         </script>
