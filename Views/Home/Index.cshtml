@@ -67,7 +67,7 @@
                 console.log(response);
             });
         }
-        $("#load").on("click", function (e) {
+        $("#load").on("click", function (e) { 
             e.preventDefault();
             GetFiles();
         });
@@ -82,7 +82,7 @@
                     const fileContainerDiv = $("#file_list");
                     fileContainerDiv.empty();
                     for (const file of files) {
-                        const fileDiv = $("<div>");
+                        const fileDiv = $("<div>"); // создаем новый div и дополняет, если "div" то меняет существующий
                         fileDiv.html(file.name);
                         fileDiv.attr("title", file.decription);
                         fileDiv.css("border", "1px solid green");

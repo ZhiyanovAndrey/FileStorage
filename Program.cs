@@ -1,3 +1,4 @@
+using FileStorage.Infrastructure.Middlewares;
 using FileStorage.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -28,6 +29,17 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+// обработка исключений
+//public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+//{
+//    if (env.IsDevelopment())
+//    {
+//        app.UseDeveloperExceptionPage();
+//        ...
+//    }
+
+app.UseApiExceptionHandling(); // обработка исключений
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
