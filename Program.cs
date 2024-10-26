@@ -30,7 +30,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// обработка исключений
+//обработка исключений
+builder.Services.Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+    if (env.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    ...
+    }
+
 //public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
 //{
 //    if (env.IsDevelopment())
