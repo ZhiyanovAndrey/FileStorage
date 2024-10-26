@@ -1,9 +1,10 @@
-﻿using FileStorage.Models.Data;
+﻿using FileStorage.Data;
+using FileStorage.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FileStorage.Models.Services
+namespace FileStorage.Services.Implementation
 {
-    public class FileExtentionService
+    public class FileExtentionService : IFileExtentionService
     {
         private readonly Context _db;
 

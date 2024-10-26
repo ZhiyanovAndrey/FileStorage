@@ -1,8 +1,9 @@
-﻿using FileStorage.Models.Data;
-using FileStorage.Models.Services;
-using FileStorage.Models;
+﻿using FileStorage.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FileStorage.Data;
+using FileStorage.Services.Implementation;
+using FileStorage.Services;
 
 namespace FileStorage.Controllers
 {
@@ -10,11 +11,11 @@ namespace FileStorage.Controllers
     [ApiController]
     public class FolderController : ControllerBase
     {
-        private readonly FolderService _folderService;
+        private readonly IFolderService _folderService;
 
-        public FolderController(Context db)
+        public FolderController(IFolderService folderService)
         {
-            _folderService = new FolderService(db);
+            _folderService = folderService ?? throw new ArgumentNullException(nameof(folderService));
 
         }
         // тестовый запрос строка

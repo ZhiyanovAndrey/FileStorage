@@ -1,8 +1,9 @@
-﻿using FileStorage.Models.Data;
-using FileStorage.Models.Services;
-using FileStorage.Models;
+﻿using FileStorage.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FileStorage.Data;
+using FileStorage.Services.Implementation;
+using FileStorage.Services;
 
 namespace FileStorage.Controllers
 {
@@ -10,11 +11,11 @@ namespace FileStorage.Controllers
     [ApiController]
     public class FileExtentionController : ControllerBase
     {
-        private readonly FileExtentionService _fileExtentionService;
+        private readonly IFileExtentionService _fileExtentionService;
 
-        public FileExtentionController(Context db)
+        public FileExtentionController(IFileExtentionService fileExtentionService)
         {
-            _fileExtentionService = new FileExtentionService(db);
+            _fileExtentionService = fileExtentionService ??throw new ArgumentNullException(nameof(fileExtentionService));
 
         }
 

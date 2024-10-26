@@ -1,6 +1,6 @@
-﻿using FileStorage.Models;
-using FileStorage.Models.Data;
-using FileStorage.Models.Services;
+﻿using FileStorage.Data;
+using FileStorage.Models;
+using FileStorage.Services;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -10,11 +10,11 @@ namespace FileStorage.API_Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
-        private readonly FileService _fileService;
+        private readonly IFileService _fileService;
 
-        public FileController(Context db)
+        public FileController(IFileService fileService)
         {
-            _fileService = new FileService(db);
+            _fileService = fileService ??throw new ArgumentNullException(nameof(fileService));
 
         }
 

@@ -1,11 +1,12 @@
-﻿using FileStorage.Models.Data;
+﻿using FileStorage.Data;
+using FileStorage.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 
-namespace FileStorage.Models.Services
+namespace FileStorage.Services.Implementation
 {
-    public class FileService
+    public class FileService : IFileService
     {
         private readonly Context _db;
 

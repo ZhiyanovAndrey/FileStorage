@@ -1,5 +1,7 @@
+using FileStorage.Data;
 using FileStorage.Infrastructure.Middlewares;
-using FileStorage.Models.Data;
+using FileStorage.Services;
+using FileStorage.Services.Implementation;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -20,6 +22,11 @@ builder.Services.AddDbContext<Context>(options =>
 
 );
 
+// сопоставление интерфейсов и реализаций
+builder.Services.AddScoped<IFileExtentionService, FileExtentionService>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IFolderService, FolderService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,12 +38,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 //обработка исключений
-builder.Services.Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
-    if (env.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    ...
-    }
+////builder.Services.Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+//    if (env.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+
+//    }
 
 //public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
 //{
