@@ -2,8 +2,10 @@ using FileStorage.Data;
 using FileStorage.Infrastructure.Middlewares;
 using FileStorage.Services;
 using FileStorage.Services.Implementation;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
+
+// Логирование Serilog
+
+IHostBuilder host = builder.Host
+    .ConfigureDefaults(args).UseSerilog((hostingContext, loggerConfiguration) =>
+                    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
+                        .Enrich.FromLogContext());
+
+//public static IHostBuilder CreateHostBuilder(string[] args) =>
+//    Host.CreateDefaultBuilder(args)
+//        .ConfigureWebHostDefaults(webBuilder =>
+//        {
+//            webBuilder.UseStartup<Startup>();
+//        })
+//        .UseSerilog((hostingContext, loggerConfiguration) =>
+//            loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
 // регистрация БД
 builder.Services.AddDbContext<Context>(options =>
