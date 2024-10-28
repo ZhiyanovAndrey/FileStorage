@@ -2,9 +2,7 @@ using FileStorage.Data;
 using FileStorage.Infrastructure.Middlewares;
 using FileStorage.Services;
 using FileStorage.Services.Implementation;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,14 +19,41 @@ IHostBuilder host = builder.Host
                     loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
                         .Enrich.FromLogContext());
 
-//public static IHostBuilder CreateHostBuilder(string[] args) =>
-//    Host.CreateDefaultBuilder(args)
-//        .ConfigureWebHostDefaults(webBuilder =>
-//        {
-//            webBuilder.UseStartup<Startup>();
-//        })
-//        .UseSerilog((hostingContext, loggerConfiguration) =>
-//            loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
+
+
+//добавим настройку и добавление Serilog в качестве логгера:
+
+//Log.Logger = new LoggerConfiguration()
+//    .Enrich.FromLogContext()
+//    .WriteTo.Console()
+//    .CreateLogger();
+
+//builder.Host.ConfigureLogging(logging =>
+//{
+//    logging.AddSerilog();
+//    logging.SetMinimumLevel(LogLevel.Information);
+//})
+//.UseSerilog();
+
+
+
+
+//var builder = Host.CreateApplicationBuilder(args);
+
+////Clear Providers 
+//builder.Logging.ClearProviders();
+////Read appsettings.json
+//Log.Logger = new LoggerConfiguration()
+//    .ReadFrom.Configuration(builder.Configuration)
+//    .CreateLogger();
+//// add the provider
+//builder.Logging.AddSerilog();
+
+
+//builder.Services.AddHostedService<Worker>();
+
+//var host = builder.Build();
+//host.Run();
 
 // регистрация БД
 builder.Services.AddDbContext<Context>(options =>

@@ -32,7 +32,7 @@ namespace FileStorage.API_Controllers
         public async Task <IActionResult> Get(int id)
         {
             var file = await _fileService.GetFileByIdAsync(id);
-            return file == null ? NotFound() : Ok(file);
+            return file == null ? NotFound() : Ok(file); // 2 теста нашелся или нет
         }
 
 

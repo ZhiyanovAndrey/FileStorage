@@ -28,8 +28,8 @@ namespace FileStorage.Domain.Exceptions
     //        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
     //        result = JsonSerializer.Serialize(problemDetails);
     //    }
-        
-    //else
+
+    //    else
     //    {
     //        _logger.LogError(ex, $"An unhandled exception has occurred, {ex.Message}");
     //        var problemDetails = new ProblemDetails

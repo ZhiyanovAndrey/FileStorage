@@ -1,4 +1,5 @@
 ﻿using FileStorage.Data;
+using FileStorage.Domain.Exceptions;
 using FileStorage.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace FileStorage.Services.Implementation
 
         public async Task<List<FileModel>> GetAllFileAsync()
         {
+            throw new DomainException("Пошло не так");
             return await _db.Files.ToListAsync();
         }
 
