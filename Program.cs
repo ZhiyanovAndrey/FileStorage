@@ -10,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
+// add swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Логирование Serilog
 
@@ -20,40 +22,6 @@ IHostBuilder host = builder.Host
                         .Enrich.FromLogContext());
 
 
-
-//добавим настройку и добавление Serilog в качестве логгера:
-
-//Log.Logger = new LoggerConfiguration()
-//    .Enrich.FromLogContext()
-//    .WriteTo.Console()
-//    .CreateLogger();
-
-//builder.Host.ConfigureLogging(logging =>
-//{
-//    logging.AddSerilog();
-//    logging.SetMinimumLevel(LogLevel.Information);
-//})
-//.UseSerilog();
-
-
-
-
-//var builder = Host.CreateApplicationBuilder(args);
-
-////Clear Providers 
-//builder.Logging.ClearProviders();
-////Read appsettings.json
-//Log.Logger = new LoggerConfiguration()
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .CreateLogger();
-//// add the provider
-//builder.Logging.AddSerilog();
-
-
-//builder.Services.AddHostedService<Worker>();
-
-//var host = builder.Build();
-//host.Run();
 
 // регистрация БД
 builder.Services.AddDbContext<Context>(options =>
