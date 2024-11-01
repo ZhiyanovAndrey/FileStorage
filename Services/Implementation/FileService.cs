@@ -23,7 +23,7 @@ namespace FileStorage.Services.Implementation
 
         public async Task<List<FileModel>> GetAllFileAsync()
         {
-            throw new DomainException("Пошло не так");
+            //throw new DomainException("Пошло не так");
             return await _db.Files.ToListAsync();
         }
 
@@ -63,8 +63,13 @@ namespace FileStorage.Services.Implementation
         }
 
 
+        // сделать перемещение файлов 
+        public async Task<FileModel?> GetFileInFoldersByIdAsync(int id)
+        {
+            return await _db.Files.FirstOrDefaultAsync(c => c.FileModelId == id);
+        }
 
-
+        // сделать выборку файлов в папке
 
 
 
