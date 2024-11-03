@@ -12,44 +12,43 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 // add swagger
 #region SWAGGER
 
-//builder.Services.AddApiVersioning(options =>
-//{
-//    // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
-//    options.ReportApiVersions = true;
-//});
+builder.Services.AddApiVersioning(options =>
+{
+    // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
+    options.ReportApiVersions = true;
+}).AddApiExplorer(options =>
+{
+    // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+    // note: the specified format code will format the version as "'v'major[.minor][-status]"
+    options.GroupNameFormat = "'v'VVV";
 
-//builder.Services.AddVersionedApiExplorer(options =>
-//{
-//    // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
-//    // note: the specified format code will format the version as "'v'major[.minor][-status]"
-//    options.GroupNameFormat = "'v'VVV";
-
-//    // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
-//    // can also be used to control the format of the API version in route templates
-//    options.SubstituteApiVersionInUrl = true;
-//});
+    // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+    // can also be used to control the format of the API version in route templates
+    options.SubstituteApiVersionInUrl = true;
+});
 
 
-//builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-//builder.Services.AddSwaggerGen(options =>
-//{
-//    // add a custom operation filter which sets default values
-//    options.OperationFilter<SwaggerDefaultValues>();
-//});
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+builder.Services.AddSwaggerGen(options =>
+{
+    // add a custom operation filter which sets default values
+    options.OperationFilter<SwaggerDefaultValues>();
+});
 
 
 
 // в инструкции микрософт
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-//c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoolWebApi", Version = "v1" }); }
-);
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen(
+////c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoolWebApi", Version = "v1" }); }
+//);
 
 
 
@@ -66,6 +65,9 @@ IHostBuilder host = builder.Host
     .ConfigureDefaults(args).UseSerilog((hostingContext, loggerConfiguration) =>
                     loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
                         .Enrich.FromLogContext());
+
+
+
 
 
 
@@ -132,23 +134,29 @@ var app = builder.Build();
 
 
 app.UseSwagger(options => { options.RouteTemplate = "api-docs/{documentName}/docs.json"; });
-app.UseSwaggerUI(options =>
-{
-    //options.RoutePrefix = "api-docs";
-    //foreach (var description in provider.ApiVersionDescriptions)
-    //    options.SwaggerEndpoint($"/api-docs/{description.GroupName}/docs.json", description.GroupName.ToUpperInvariant());
-});
+    app.UseSwaggerUI(options =>
+    {
+        options.RoutePrefix = "api-docs";
+        var descriptions = app.DescribeApiVersions();
+        foreach (var description in descriptions)
+        {
+            var url = $"/api-docs/{description.GroupName}/docs.json"; //$"/swagger/{description.GroupName}/swagger.json";
+            var name = description.GroupName.ToUpperInvariant();
+            options.SwaggerEndpoint(url, name);
+        }
+    });
+
 
 // в инструкции микрософт
 if (builder.Environment.IsDevelopment())
 {
-    app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
-    });
+
 }
 #endregion
+
+
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -156,6 +164,11 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+
+
+
+
 
 //обработка исключений
 //builder.Services.Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

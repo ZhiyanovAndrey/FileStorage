@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using FileStorage.Data;
 using FileStorage.Services.Implementation;
 using FileStorage.Services;
+using Asp.Versioning;
 
-namespace FileStorage.Controllers
+namespace FileStorage.Apis.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class FileExtentionController : ControllerBase
     {
@@ -15,7 +17,7 @@ namespace FileStorage.Controllers
 
         public FileExtentionController(IFileExtentionService fileExtentionService)
         {
-            _fileExtentionService = fileExtentionService ??throw new ArgumentNullException(nameof(fileExtentionService));
+            _fileExtentionService = fileExtentionService ?? throw new ArgumentNullException(nameof(fileExtentionService));
 
         }
 

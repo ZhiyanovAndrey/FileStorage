@@ -62,7 +62,7 @@
 
 
 
-            $.get('/api/file')
+            $.get('/api/v1/file')
             .then(function (response) {
                 console.log(response);
             });
@@ -73,7 +73,7 @@
         });
 
         function GetFiles() {
-            $.ajax("/api/file",
+            $.ajax("/api/v1/file",
                 {
                     "dataType": "json",
                     "method": "GET"

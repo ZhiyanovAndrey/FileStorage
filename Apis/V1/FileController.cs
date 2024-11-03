@@ -1,12 +1,15 @@
-﻿using FileStorage.Data;
+﻿using Asp.Versioning;
+using FileStorage.Data;
 using FileStorage.Models;
 using FileStorage.Services;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace FileStorage.API_Controllers
+namespace FileStorage.Apis.V1
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class FileController : ControllerBase
     {
@@ -14,7 +17,7 @@ namespace FileStorage.API_Controllers
 
         public FileController(IFileService fileService)
         {
-            _fileService = fileService ??throw new ArgumentNullException(nameof(fileService));
+            _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
 
         }
 
@@ -23,13 +26,13 @@ namespace FileStorage.API_Controllers
         public async Task<IEnumerable<FileModel>> GetFiles()
         {
             return await _fileService.GetAllFileAsync();
-           
+
         }
 
 
         // GET api/<FileController>/5
         [HttpGet("{id}")]
-        public async Task <IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var file = await _fileService.GetFileByIdAsync(id);
             return file == null ? NotFound() : Ok(file); // 2 теста нашелся или нет
