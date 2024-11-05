@@ -44,18 +44,6 @@ builder.Services.AddSwaggerGen(options =>
 
 
 
-// в инструкции микрософт
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen(
-////c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoolWebApi", Version = "v1" }); }
-//);
-
-
-
-
-
-//    logging.AddSerilog();
-
 #endregion
 
 
@@ -68,52 +56,6 @@ IHostBuilder host = builder.Host
 
 
 
-
-
-
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .CreateLogger();
-//// add the provider
-//builder.Logging.AddSerilog();
-
-
-//builder.Services.AddHostedService<Worker>();
-
-//var host = builder.Build();
-//host.Run();
-
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .CreateLogger();
-//// add the provider
-//builder.Logging.AddSerilog();
-
-
-//builder.Services.AddHostedService<Worker>();
-
-//var host = builder.Build();
-//host.Run();
-
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .CreateLogger();
-//// add the provider
-//builder.Logging.AddSerilog();
-
-
-//builder.Services.AddHostedService<Worker>();
-
-//var host = builder.Build();
-//host.Run();
-
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .CreateLogger();
-//// add the provider
-//builder.Logging.AddSerilog();
-
-
-//builder.Services.AddHostedService<Worker>();
-
-//var host = builder.Build();
-//host.Run();
 
 // регистрация БД
 builder.Services.AddDbContext<Context>(options =>

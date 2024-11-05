@@ -63,10 +63,19 @@ namespace FileStorage.Services.Implementation
         }
 
 
-        // сделать перемещение файлов 
-        public async Task<FileModel?> GetFileInFoldersByIdAsync(int id)
+        // перемещение файлов из папки в папку
+        public async Task<FileModel?> MoveFileInFoldersByIdAsync(int id, int numberOfFolderToMove)
         {
-            return await _db.Files.FirstOrDefaultAsync(c => c.FileModelId == id);
+            var movedFile = await _db.Files.FirstOrDefaultAsync(c => c.FileModelId == id);
+            if (movedFile != null)
+            {
+                movedFile.FolderModelId = numberOfFolderToMove;
+
+                _db.Files.Update(movedFile);
+                await _db.SaveChangesAsync();
+            }
+            return movedFile;
+
         }
 
         // сделать выборку файлов в папке

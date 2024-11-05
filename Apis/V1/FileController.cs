@@ -60,8 +60,14 @@ namespace FileStorage.Apis.V1
 
         // PUT api/<FileController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] string value)
         {
+            //if (value != null)
+            //{
+            //var result =  _fileService.MoveFileInFoldersByIdAsync
+            //return result ? Ok() : NotFound();
+            //}
+            return BadRequest();
         }
 
         // DELETE api/<FileController>/5
