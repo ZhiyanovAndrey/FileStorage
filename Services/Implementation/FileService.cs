@@ -80,7 +80,11 @@ namespace FileStorage.Services.Implementation
 
         // сделать выборку файлов в папке
 
+        public async Task<List<FileModel>> GetFilesFromFolderAsync(int id)
+        {
+            return await _db.Files.Where(c => c.FolderModelId == id).ToListAsync();
 
+        }
 
 
 

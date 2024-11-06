@@ -108,26 +108,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-
-
-
-
-//обработка исключений
-//builder.Services.Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
-//if (env.IsDevelopment())
-//{
-//    app.UseDeveloperExceptionPage();
-
-//}
-
-//public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
-//{
-//    if (env.IsDevelopment())
-//    {
-//        app.UseDeveloperExceptionPage();
-//        ...
-//    }
-
 app.UseApiExceptionHandling(); // для обработки исключений
 
 app.UseHttpsRedirection();
