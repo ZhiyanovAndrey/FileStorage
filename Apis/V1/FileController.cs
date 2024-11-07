@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using FileStorage.Data;
+using FileStorage.Domain.Exceptions;
 using FileStorage.Models;
 using FileStorage.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace FileStorage.Apis.V1
         }
 
 
+
         // GET api/<FileController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
@@ -37,6 +39,14 @@ namespace FileStorage.Apis.V1
             var file = await _fileService.GetFileByIdAsync(id);
             return file == null ? NotFound() : Ok(file); // 2 теста нашелся или нет
         }
+
+        //[HttpGet("folder/{id}")]
+        //public async Task<IEnumerable<FileModel>> GetFilesFromFolder(int folderId)
+        //{
+        //    //var file = await _fileService //.GetFileByIdAsync(folderId);
+        //    return file == null ? NotFound() : Ok(file);
+
+        //}
 
 
         // POST api/<FileController>
@@ -59,15 +69,41 @@ namespace FileStorage.Apis.V1
         }
 
         // PUT api/<FileController>/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] string value)
+        [HttpPut("{id}/rename")]
+        public async Task<IActionResult> Rename(int id, [FromBody] string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new RequaeredParameterMeetingExeption(nameof(name));
+            }
+
+            
+            
+            
             //if (value != null)
             //{
-            //var result =  _fileService.MoveFileInFoldersByIdAsync
+            //    var result = _fileService.MoveFileInFoldersByIdAsync();
             //return result ? Ok() : NotFound();
             //}
-            return BadRequest();
+            return Ok();
+        }
+
+        public async Task<IActionResult> Put(int id, [FromBody] FileModel value)
+        {
+            if (string.IsNullOrWhiteSpace(value.Name))
+            {
+                throw new RequaeredParameterMeetingExeption(nameof(value));
+            }
+
+
+
+
+            //if (value != null)
+            //{
+            //    var result = _fileService.MoveFileInFoldersByIdAsync();
+            //return result ? Ok() : NotFound();
+            //}
+            return Ok();
         }
 
         // DELETE api/<FileController>/5

@@ -78,7 +78,7 @@ namespace FileStorage.Services.Implementation
 
         }
 
-        // сделать выборку файлов в папке
+        // выборка файлов в папке
 
         public async Task<List<FileModel>> GetFilesFromFolderAsync(int id)
         {
