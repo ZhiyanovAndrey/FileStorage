@@ -23,7 +23,7 @@ namespace FileStorage.Services.Implementation
 
         public async Task<List<FileModel>> GetAllFileAsync()
         {
-            //throw new DomainException("Пошло не так");
+            //throw new DomainException("Что то пошло не так");
             return await _db.Files.ToListAsync();
         }
 

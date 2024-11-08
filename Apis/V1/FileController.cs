@@ -72,20 +72,14 @@ namespace FileStorage.Apis.V1
         [HttpPut("{id}/rename")]
         public async Task<IActionResult> Rename(int id, [FromBody] string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name)) // если строка пустая или одни пробелы
             {
                 throw new RequaeredParameterMeetingExeption(nameof(name));
             }
 
-            
-            
-            
-            //if (value != null)
-            //{
-            //    var result = _fileService.MoveFileInFoldersByIdAsync();
-            //return result ? Ok() : NotFound();
-            //}
-            return Ok();
+            var file = await _fileService.RenameFileAsync(id, name);
+            return file == null ? NotFound() : Ok(file);
+                       
         }
 
         public async Task<IActionResult> Put(int id, [FromBody] FileModel value)
