@@ -10,5 +10,7 @@ namespace FileStorage.Services
         Task<FileModel?> GetFileByIdAsync(int id);
         Task<FileModel?> RenameFileAsync(int id, string Name);
         Task<FileModel?> MoveFileInFoldersByIdAsync(int id, int numberOfFolderToMove);
+        Task<List<FileModel>> GetFilesFromFolderAsync(int id);
+
     }
 }

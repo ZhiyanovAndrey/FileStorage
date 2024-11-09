@@ -4,6 +4,7 @@ using FileStorage.Domain.Exceptions;
 using FileStorage.Models;
 using FileStorage.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 
 namespace FileStorage.Apis.V1
@@ -40,13 +41,13 @@ namespace FileStorage.Apis.V1
             return file == null ? NotFound() : Ok(file); // 2 теста нашелся или нет
         }
 
-        //[HttpGet("folder/{id}")]
-        //public async Task<IEnumerable<FileModel>> GetFilesFromFolder(int folderId)
-        //{
-        //    //var file = await _fileService //.GetFileByIdAsync(folderId);
-        //    return file == null ? NotFound() : Ok(file);
-
-        //}
+        // GET api/<FileController>/5
+        [HttpGet("{id}/folder")]
+        public async Task<IEnumerable<FileModel>> GetFilesFromFolder(int folderId)
+        {
+            return await _fileService.GetFilesFromFolderAsync(folderId);
+            
+        }
 
 
         // POST api/<FileController>
@@ -79,25 +80,39 @@ namespace FileStorage.Apis.V1
 
             var file = await _fileService.RenameFileAsync(id, name);
             return file == null ? NotFound() : Ok(file);
-                       
+
         }
 
-        public async Task<IActionResult> Put(int id, [FromBody] FileModel value)
+        [HttpPut("{id}/move")]
+        public async Task<IActionResult> Move(int id, [FromBody] string value)
         {
-            if (string.IsNullOrWhiteSpace(value.Name))
+            if (string.IsNullOrWhiteSpace(value))
             {
                 throw new RequaeredParameterMeetingExeption(nameof(value));
             }
 
 
+            try
+            {
+                var newId = Convert.ToInt32(value);
+                var file = await _fileService.MoveFileInFoldersByIdAsync(id, newId);
+                return file == null ? NotFound() : Ok(file);
+            }
+            catch (Exception ex)
+            {
+
+                throw new DomainException($"Ошибка: {ex}");
+            }
 
 
-            //if (value != null)
+            //int newId;
+            //bool sucses = int.TryParse(value, out newId);
+            //if (sucses)
             //{
-            //    var result = _fileService.MoveFileInFoldersByIdAsync();
-            //return result ? Ok() : NotFound();
+            //    var file = await _fileService.MoveFileInFoldersByIdAsync(id, newId);
+            //    return file == null ? NotFound() : Ok(file);
             //}
-            return Ok();
+            //else throw new DomainException($"Необходимо ввести целое число {nameof(value)}");
         }
 
         // DELETE api/<FileController>/5
@@ -108,7 +123,7 @@ namespace FileStorage.Apis.V1
             return result == null ? NotFound() : Ok();
         }
 
-
+        
 
     }
 }
