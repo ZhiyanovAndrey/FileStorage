@@ -1,9 +1,7 @@
 ﻿using FileStorage.Data;
 using FileStorage.Domain.Exceptions;
 using FileStorage.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
 
 namespace FileStorage.Services.Implementation
 {
@@ -66,14 +64,23 @@ namespace FileStorage.Services.Implementation
         // перемещение файлов из папки в папку
         public async Task<FileModel?> MoveFileInFoldersByIdAsync(int id, int numberOfFolderToMove)
         {
-            var movedFile = await _db.Files.FirstOrDefaultAsync(c => c.FileModelId == id);
-            if (movedFile != null)
-            {
-                movedFile.FolderModelId = numberOfFolderToMove;
 
-                _db.Files.Update(movedFile);
-                await _db.SaveChangesAsync();
+            var folder = _db.Folders.FirstOrDefault(f => f.FolderModelId == numberOfFolderToMove);
+            if (_db.Folders.FirstOrDefault(f => f.FolderModelId == numberOfFolderToMove) == null)
+            {
+                //throw new Exception($"Папка с номером {numberOfFolderToMove} не найдена");
+                throw new FolderDoesNotExistException(numberOfFolderToMove);
             }
+
+            var movedFile = await _db.Files.FirstOrDefaultAsync(c => c.FileModelId == id);
+            if (movedFile == null)
+            {
+                throw new FileDoesNotExistException(id);
+            }
+
+            movedFile.FolderModelId = numberOfFolderToMove;
+            _db.Files.Update(movedFile);
+            await _db.SaveChangesAsync();
             return movedFile;
 
         }
@@ -82,6 +89,8 @@ namespace FileStorage.Services.Implementation
 
         public async Task<List<FileModel>> GetFilesFromFolderAsync(int id)
         {
+
+
             return await _db.Files.Where(c => c.FolderModelId == id).ToListAsync();
 
         }
